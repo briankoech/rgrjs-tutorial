@@ -20212,32 +20212,29 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var content = this.state.links.map(function (link) {
+	        return _react2.default.createElement(
+	          'li',
+	          { key: link._id },
+	          _react2.default.createElement(
+	            'a',
+	            { href: link.url },
+	            link.title
+	          )
+	        );
+	      });
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
 	          'h3',
 	          null,
-	          'Links '
+	          'Links'
 	        ),
 	        _react2.default.createElement(
 	          'ul',
 	          null,
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            'Links ...'
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            'Links ...'
-	          ),
-	          _react2.default.createElement(
-	            'li',
-	            null,
-	            'Links ...'
-	          )
+	          content
 	        )
 	      );
 	    }
@@ -30154,7 +30151,7 @@
 	
 	var ServerActions = {
 	  receiveLinks: function receiveLinks(links) {
-	    console.log('receive Links');
+	    console.log('2. In Actions');
 	    _AppDispatcher2.default.dispatch({
 	      actionType: _Constants.ActionTypes.RECEIVE_LINKS,
 	      links: links
@@ -30548,8 +30545,6 @@
 	
 	var _links = [];
 	
-	console.log('Called now!!');
-	
 	var LinkStore = function (_EventEmitter) {
 	  _inherits(LinkStore, _EventEmitter);
 	
@@ -30559,10 +30554,10 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LinkStore).call(this, props));
 	
 	    _AppDispatcher2.default.register(function (action) {
-	      switch (action.ActionTypes) {
+	      switch (action.actionType) {
 	        case _Constants.ActionTypes.RECEIVE_LINKS:
 	          // do something with the data
-	          console.log('In Store', action);
+	          console.log('3. In Store');
 	          _links = action.links;
 	          _this.emit('change');
 	          break;

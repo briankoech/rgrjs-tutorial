@@ -26,12 +26,15 @@ export default class Main extends React.Component {
     this.setState(_getAppState());
   }
   render() {
+    let content = this.state.links.map(link => {
+      return <li key={link._id}>
+                <a href={link.url}>{link.title}</a>
+              </li>
+    });
     return <div>
-              <h3>Links </h3>
+              <h3>Links</h3>
               <ul>
-                <li>Links ...</li>
-                <li>Links ...</li>
-                <li>Links ...</li>
+                {content}
               </ul>
           </div>
   }
