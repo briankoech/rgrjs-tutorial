@@ -1,4 +1,6 @@
 import express from 'express';
+import schema from './data/Schema';
+import GraphQLHTTP from 'express-graphql';
 import { MongoClient } from 'mongodb';
 
 let app = express();
@@ -10,6 +12,11 @@ MongoClient.connect(process.env.MONGO_URL, (err, database) => {
   if(err) throw err;
 
   db = database;
+  app.use('/graphql', GraphQLHTTP({
+    schema: schema(db),
+    graphiql: true
+  }));
+
   app.listen(3000, () => console.log('Connected to the db'));
 });
 
